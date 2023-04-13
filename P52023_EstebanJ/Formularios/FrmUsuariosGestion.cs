@@ -113,87 +113,8 @@ namespace P52023_EstebanJ.Formularios
             BtnEliminar.Enabled = true;
         }
 
-        private void DgLista_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //cuando seleccionemos una fila del datagrid se debe cargar la info de dicho usuario
-            //en el usuario local y luego dibujar esa info en los controles graficos 
 
-            if (DgLista.SelectedRows.Count == 1)
-            {
-                LimpiarFormulario();
-
-                //de la colección de filas seleccionadas (que en este caso es solo una) 
-                //seleccionamos la fila en indice 0, o sea la primera 
-                DataGridViewRow MiFila = DgLista.SelectedRows[0];
-
-                //lo que necesito es el valor del ID del usuario para realizaer la consulta 
-                //y traer todos los datos para llenar el objeto de usuario local 
-                int IdUsuario = Convert.ToInt32(MiFila.Cells["CUsuarioID"].Value);
-
-                //para no asumir riesgos se reinstancia el usuario local 
-                MiUsuarioLocal = new Logica.Models.Usuario();
-
-                //ahora le agregarmos el valor obtenido por la fila al ID del usuario local
-                MiUsuarioLocal.UsuarioID = IdUsuario;
-
-                //una vez que tengo el objeto local con el valor del id, puedo ir a consultar
-                //el usuario por ese id y llenar el resto de atributos. 
-                MiUsuarioLocal = MiUsuarioLocal.ConsultarPorIDRetornaUsuario();
-
-                //validamos que el usuario local tenga datos 
-
-                if (MiUsuarioLocal != null && MiUsuarioLocal.UsuarioID > 0)
-                {
-                    //si cargamos correctamente el usuario local llenamos los controles 
-
-                    TxtUsuarioID.Text = Convert.ToString(MiUsuarioLocal.UsuarioID);
-
-                    TxtUsuarioNombre.Text = MiUsuarioLocal.UsuarioNombre;
-
-                    TxtUsuarioCedula.Text = MiUsuarioLocal.UsuarioCedula;
-
-                    TxtUsuarioTelefono.Text = MiUsuarioLocal.UsuarioTelefono;
-
-                    TxtUsuarioCorreo.Text = MiUsuarioLocal.UsuarioCorreo;
-
-                    TxtUsuarioDireccion.Text = MiUsuarioLocal.UsuarioDireccion;
-
-                    //combobox 
-                    CbRolesUsuario.SelectedValue = MiUsuarioLocal.MiRolTipo.UsuarioRolID;
-
-                    ActivarEditarEliminar();
-
-                }
-
-
-
-            }
-
-
-        }
-
-        private void BtnLimpiar_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
-
-            DgLista.ClearSelection();
-
-            ActivarAgregar();
-        }
-
-        private void LimpiarFormulario()
-        {
-            TxtUsuarioID.Clear();
-            TxtUsuarioNombre.Clear();
-            TxtUsuarioCedula.Clear();
-            TxtUsuarioTelefono.Clear();
-            TxtUsuarioCorreo.Clear();
-            TxtUsuarioContrasennia.Clear();
-
-            CbRolesUsuario.SelectedIndex = -1;
-
-            TxtUsuarioDireccion.Clear();
-        }
+   
 
 
         private bool ValidarDatosDigitados(bool OmitirPassword = false)
@@ -282,7 +203,139 @@ namespace P52023_EstebanJ.Formularios
         }
 
 
-        private void BtnAgregar_Click(object sender, EventArgs e)
+ 
+
+    
+
+
+        private void TxtUsuarioNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresTexto(e, true);
+
+        }
+
+        private void TxtUsuarioCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresNumeros(e, true);    
+        }
+
+        private void TxtUsuarioTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioCorreo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresTexto(e,false,true);
+        }
+
+        private void TxtUsuarioContrasennia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioDireccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Validaciones.CaracteresTexto(e, true);
+        }
+
+        private void TxtUsuarioCorreo_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()))
+            {
+                if(Validaciones.ValidarEmail(TxtUsuarioCorreo.Text.Trim()))
+                {
+                    MessageBox.Show("El formato del correo electronico es incorrecto", "Error de Validacion", MessageBoxButtons.OK);
+                    TxtUsuarioCorreo.Focus();
+                }
+            }
+        }
+
+        private void TxtUsuarioCorreo_Enter(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()))
+            {
+                TxtUsuarioCorreo.SelectAll();
+            }
+        }
+
+        private void CboxVerActivos_CheckedChanged(object sender, EventArgs e)
+        {
+            CargarListaDeUsuarios();    
+
+            if(CboxVerActivos.Checked)
+            {
+                BtnEliminar.Text = "ELIMINAR";
+            }
+            else
+            {
+                BtnEliminar.Text = "ACTIVAR";
+            }
+        }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            CargarListaDeUsuarios();
+        }
+
+        private void DgLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //cuando seleccionemos una fila del datagrid se debe cargar la info de dicho usuario
+            //en el usuario local y luego dibujar esa info en los controles graficos 
+
+            if (DgLista.SelectedRows.Count == 1)
+            {
+                LimpiarFormulario();
+
+                //de la colección de filas seleccionadas (que en este caso es solo una) 
+                //seleccionamos la fila en indice 0, o sea la primera 
+                DataGridViewRow MiFila = DgLista.SelectedRows[0];
+
+                //lo que necesito es el valor del ID del usuario para realizaer la consulta 
+                //y traer todos los datos para llenar el objeto de usuario local 
+                int IdUsuario = Convert.ToInt32(MiFila.Cells["CUsuarioID"].Value);
+
+                //para no asumir riesgos se reinstancia el usuario local 
+                MiUsuarioLocal = new Logica.Models.Usuario();
+
+                //ahora le agregarmos el valor obtenido por la fila al ID del usuario local
+                MiUsuarioLocal.UsuarioID = IdUsuario;
+
+                //una vez que tengo el objeto local con el valor del id, puedo ir a consultar
+                //el usuario por ese id y llenar el resto de atributos. 
+                MiUsuarioLocal = MiUsuarioLocal.ConsultarPorIDRetornaUsuario();
+
+                //validamos que el usuario local tenga datos 
+
+                if (MiUsuarioLocal != null && MiUsuarioLocal.UsuarioID > 0)
+                {
+                    //si cargamos correctamente el usuario local llenamos los controles 
+
+                    TxtUsuarioID.Text = Convert.ToString(MiUsuarioLocal.UsuarioID);
+
+                    TxtUsuarioNombre.Text = MiUsuarioLocal.UsuarioNombre;
+
+                    TxtUsuarioCedula.Text = MiUsuarioLocal.UsuarioCedula;
+
+                    TxtUsuarioTelefono.Text = MiUsuarioLocal.UsuarioTelefono;
+
+                    TxtUsuarioCorreo.Text = MiUsuarioLocal.UsuarioCorreo;
+
+                    TxtUsuarioDireccion.Text = MiUsuarioLocal.UsuarioDireccion;
+
+                    //combobox 
+                    CbRolesUsuario.SelectedValue = MiUsuarioLocal.MiRolTipo.UsuarioRolID;
+
+                    ActivarEditarEliminar();
+
+                }
+
+
+
+            }
+        }
+
+        private void BtnAgregar_Click_1(object sender, EventArgs e)
         {
             if (ValidarDatosDigitados())
             {
@@ -371,7 +424,7 @@ namespace P52023_EstebanJ.Formularios
             }
         }
 
-        private void BtnModificar_Click(object sender, EventArgs e)
+        private void BtnModificar_Click_1(object sender, EventArgs e)
         {
             if (ValidarDatosDigitados(true))
             {
@@ -419,7 +472,7 @@ namespace P52023_EstebanJ.Formularios
             }
         }
 
-        private void BtnEliminar_Click(object sender, EventArgs e)
+        private void BtnEliminar_Click_1(object sender, EventArgs e)
         {
 
             if (MiUsuarioLocal.UsuarioID > 0 && MiUsuarioLocal.ConsultarPorID())
@@ -451,88 +504,52 @@ namespace P52023_EstebanJ.Formularios
                 }
                 else
                 {
-                    //ACTIVAR USUARIO
+                   
+                        //DESACTIVAR USUARIO
+                        DialogResult r = MessageBox.Show("¿Está seguro de activar al Usuario?",
+                                                         "???",
+                                                         MessageBoxButtons.YesNo,
+                                                         MessageBoxIcon.Question);
+
+                        if (r == DialogResult.Yes)
+                        {
+                            if (MiUsuarioLocal.Activar())
+                            {
+                                MessageBox.Show("El usuario ha sido activado correctamente.", "!!!", MessageBoxButtons.OK);
+                                LimpiarFormulario();
+                                CargarListaDeUsuarios();
+                            }
+
+                        }
+
+                    
 
                 }
 
 
             }
-
         }
 
-        private void TxtUsuarioNombre_KeyPress(object sender, KeyPressEventArgs e)
+        private void BtnLimpiar_Click_1(object sender, EventArgs e)
         {
-            e.Handled = Validaciones.CaracteresTexto(e, true);
+            LimpiarFormulario();
 
+            DgLista.ClearSelection();
+
+            ActivarAgregar();
         }
-
-        private void TxtUsuarioCedula_KeyPress(object sender, KeyPressEventArgs e)
+        private void LimpiarFormulario()
         {
-            e.Handled = Validaciones.CaracteresNumeros(e, true);    
-        }
+            TxtUsuarioID.Clear();
+            TxtUsuarioNombre.Clear();
+            TxtUsuarioCedula.Clear();
+            TxtUsuarioTelefono.Clear();
+            TxtUsuarioCorreo.Clear();
+            TxtUsuarioContrasennia.Clear();
 
-        private void TxtUsuarioTelefono_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = Validaciones.CaracteresTexto(e);
-        }
+            CbRolesUsuario.SelectedIndex = -1;
 
-        private void TxtUsuarioCorreo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = Validaciones.CaracteresTexto(e,false,true);
-        }
-
-        private void TxtUsuarioContrasennia_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = Validaciones.CaracteresTexto(e);
-        }
-
-        private void TxtUsuarioDireccion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = Validaciones.CaracteresTexto(e, true);
-        }
-
-        private void TxtUsuarioCorreo_Leave(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()))
-            {
-                if(Validaciones.ValidarEmail(TxtUsuarioCorreo.Text.Trim()))
-                {
-                    MessageBox.Show("El formato del correo electronico es incorrecto", "Error de Validacion", MessageBoxButtons.OK);
-                    TxtUsuarioCorreo.Focus();
-                }
-            }
-        }
-
-        private void TxtUsuarioCorreo_Enter(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()))
-            {
-                TxtUsuarioCorreo.SelectAll();
-            }
-        }
-
-        private void CboxVerActivos_CheckedChanged(object sender, EventArgs e)
-        {
-            CargarListaDeUsuarios();    
-
-            if(CboxVerActivos.Checked)
-            {
-                BtnEliminar.Text = "ELIMINAR";
-            }
-            else
-            {
-                BtnEliminar.Text = "ACTIVAR";
-            }
-        }
-
-        private void TxtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            CargarListaDeUsuarios();
-        }
-
-        private void DgLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            TxtUsuarioDireccion.Clear();
         }
     }
 }

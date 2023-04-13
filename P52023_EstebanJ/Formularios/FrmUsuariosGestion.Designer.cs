@@ -32,6 +32,12 @@
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.CboxVerActivos = new System.Windows.Forms.CheckBox();
             this.DgLista = new System.Windows.Forms.DataGridView();
+            this.CUsuarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioRolDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TxtUsuarioDireccion = new System.Windows.Forms.TextBox();
             this.CbRolesUsuario = new System.Windows.Forms.ComboBox();
@@ -54,12 +60,6 @@
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnLimpiar = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
-            this.CUsuarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUsuarioNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUsuarioCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUsuarioCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUsuarioTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUsuarioRolDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -122,6 +122,64 @@
             this.DgLista.TabIndex = 3;
             this.DgLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLista_CellContentClick);
             // 
+            // CUsuarioID
+            // 
+            this.CUsuarioID.DataPropertyName = "UsuarioID";
+            this.CUsuarioID.HeaderText = "Cod.Usuario";
+            this.CUsuarioID.MinimumWidth = 6;
+            this.CUsuarioID.Name = "CUsuarioID";
+            this.CUsuarioID.ReadOnly = true;
+            this.CUsuarioID.Width = 125;
+            // 
+            // CUsuarioNombre
+            // 
+            this.CUsuarioNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CUsuarioNombre.DataPropertyName = "UsuarioNombre";
+            this.CUsuarioNombre.HeaderText = "Nombre";
+            this.CUsuarioNombre.MinimumWidth = 6;
+            this.CUsuarioNombre.Name = "CUsuarioNombre";
+            this.CUsuarioNombre.ReadOnly = true;
+            // 
+            // CUsuarioCedula
+            // 
+            this.CUsuarioCedula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CUsuarioCedula.DataPropertyName = "UsuarioCedula";
+            this.CUsuarioCedula.HeaderText = "Cedula";
+            this.CUsuarioCedula.MinimumWidth = 6;
+            this.CUsuarioCedula.Name = "CUsuarioCedula";
+            this.CUsuarioCedula.ReadOnly = true;
+            this.CUsuarioCedula.Width = 125;
+            // 
+            // CUsuarioCorreo
+            // 
+            this.CUsuarioCorreo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CUsuarioCorreo.DataPropertyName = "UsuarioCorreo";
+            this.CUsuarioCorreo.HeaderText = "Correo";
+            this.CUsuarioCorreo.MinimumWidth = 6;
+            this.CUsuarioCorreo.Name = "CUsuarioCorreo";
+            this.CUsuarioCorreo.ReadOnly = true;
+            this.CUsuarioCorreo.Width = 180;
+            // 
+            // CUsuarioTelefono
+            // 
+            this.CUsuarioTelefono.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CUsuarioTelefono.DataPropertyName = "UsuarioTelefono";
+            this.CUsuarioTelefono.HeaderText = "Telefono";
+            this.CUsuarioTelefono.MinimumWidth = 6;
+            this.CUsuarioTelefono.Name = "CUsuarioTelefono";
+            this.CUsuarioTelefono.ReadOnly = true;
+            this.CUsuarioTelefono.Width = 150;
+            // 
+            // CUsuarioRolDescripcion
+            // 
+            this.CUsuarioRolDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CUsuarioRolDescripcion.DataPropertyName = "UsuarioRolDescripcion";
+            this.CUsuarioRolDescripcion.HeaderText = "Rol";
+            this.CUsuarioRolDescripcion.MinimumWidth = 6;
+            this.CUsuarioRolDescripcion.Name = "CUsuarioRolDescripcion";
+            this.CUsuarioRolDescripcion.ReadOnly = true;
+            this.CUsuarioRolDescripcion.Width = 125;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.TxtUsuarioDireccion);
@@ -143,14 +201,14 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(42, 395);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(882, 273);
+            this.groupBox1.Size = new System.Drawing.Size(1071, 273);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalle de Usuario";
             // 
             // TxtUsuarioDireccion
             // 
-            this.TxtUsuarioDireccion.Location = new System.Drawing.Point(574, 161);
+            this.TxtUsuarioDireccion.Location = new System.Drawing.Point(689, 164);
             this.TxtUsuarioDireccion.Multiline = true;
             this.TxtUsuarioDireccion.Name = "TxtUsuarioDireccion";
             this.TxtUsuarioDireccion.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -162,14 +220,14 @@
             // 
             this.CbRolesUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbRolesUsuario.FormattingEnabled = true;
-            this.CbRolesUsuario.Location = new System.Drawing.Point(597, 118);
+            this.CbRolesUsuario.Location = new System.Drawing.Point(722, 122);
             this.CbRolesUsuario.Name = "CbRolesUsuario";
             this.CbRolesUsuario.Size = new System.Drawing.Size(254, 33);
             this.CbRolesUsuario.TabIndex = 14;
             // 
             // TxtUsuarioContrasennia
             // 
-            this.TxtUsuarioContrasennia.Location = new System.Drawing.Point(597, 72);
+            this.TxtUsuarioContrasennia.Location = new System.Drawing.Point(725, 75);
             this.TxtUsuarioContrasennia.Name = "TxtUsuarioContrasennia";
             this.TxtUsuarioContrasennia.Size = new System.Drawing.Size(251, 30);
             this.TxtUsuarioContrasennia.TabIndex = 13;
@@ -178,7 +236,7 @@
             // 
             // TxtUsuarioCorreo
             // 
-            this.TxtUsuarioCorreo.Location = new System.Drawing.Point(597, 29);
+            this.TxtUsuarioCorreo.Location = new System.Drawing.Point(725, 34);
             this.TxtUsuarioCorreo.Name = "TxtUsuarioCorreo";
             this.TxtUsuarioCorreo.Size = new System.Drawing.Size(251, 30);
             this.TxtUsuarioCorreo.TabIndex = 12;
@@ -297,12 +355,13 @@
             this.BtnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAgregar.ForeColor = System.Drawing.Color.White;
-            this.BtnAgregar.Location = new System.Drawing.Point(38, 674);
+            this.BtnAgregar.Location = new System.Drawing.Point(22, 695);
             this.BtnAgregar.Name = "BtnAgregar";
-            this.BtnAgregar.Size = new System.Drawing.Size(149, 45);
+            this.BtnAgregar.Size = new System.Drawing.Size(179, 45);
             this.BtnAgregar.TabIndex = 5;
             this.BtnAgregar.Text = "AGREGAR";
             this.BtnAgregar.UseVisualStyleBackColor = false;
+            this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click_1);
             // 
             // BtnModificar
             // 
@@ -310,12 +369,13 @@
             this.BtnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnModificar.ForeColor = System.Drawing.Color.Black;
-            this.BtnModificar.Location = new System.Drawing.Point(209, 674);
+            this.BtnModificar.Location = new System.Drawing.Point(229, 695);
             this.BtnModificar.Name = "BtnModificar";
-            this.BtnModificar.Size = new System.Drawing.Size(146, 45);
+            this.BtnModificar.Size = new System.Drawing.Size(171, 45);
             this.BtnModificar.TabIndex = 6;
             this.BtnModificar.Text = "MODIFICAR";
             this.BtnModificar.UseVisualStyleBackColor = false;
+            this.BtnModificar.Click += new System.EventHandler(this.BtnModificar_Click_1);
             // 
             // BtnEliminar
             // 
@@ -323,94 +383,38 @@
             this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEliminar.ForeColor = System.Drawing.Color.White;
-            this.BtnEliminar.Location = new System.Drawing.Point(399, 674);
+            this.BtnEliminar.Location = new System.Drawing.Point(429, 695);
             this.BtnEliminar.Name = "BtnEliminar";
-            this.BtnEliminar.Size = new System.Drawing.Size(138, 45);
+            this.BtnEliminar.Size = new System.Drawing.Size(172, 45);
             this.BtnEliminar.TabIndex = 7;
             this.BtnEliminar.Text = "ELIMINAR";
             this.BtnEliminar.UseVisualStyleBackColor = false;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click_1);
             // 
             // BtnLimpiar
             // 
             this.BtnLimpiar.BackColor = System.Drawing.Color.SteelBlue;
             this.BtnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnLimpiar.Location = new System.Drawing.Point(572, 674);
+            this.BtnLimpiar.Location = new System.Drawing.Point(636, 695);
             this.BtnLimpiar.Name = "BtnLimpiar";
-            this.BtnLimpiar.Size = new System.Drawing.Size(138, 45);
+            this.BtnLimpiar.Size = new System.Drawing.Size(166, 45);
             this.BtnLimpiar.TabIndex = 8;
             this.BtnLimpiar.Text = "LIMPIAR";
             this.BtnLimpiar.UseVisualStyleBackColor = false;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click_1);
             // 
             // BtnCancelar
             // 
             this.BtnCancelar.BackColor = System.Drawing.Color.RosyBrown;
             this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancelar.Location = new System.Drawing.Point(752, 674);
+            this.BtnCancelar.Location = new System.Drawing.Point(870, 695);
             this.BtnCancelar.Name = "BtnCancelar";
-            this.BtnCancelar.Size = new System.Drawing.Size(138, 45);
+            this.BtnCancelar.Size = new System.Drawing.Size(175, 45);
             this.BtnCancelar.TabIndex = 9;
             this.BtnCancelar.Text = "CANCELAR";
             this.BtnCancelar.UseVisualStyleBackColor = false;
-            // 
-            // CUsuarioID
-            // 
-            this.CUsuarioID.DataPropertyName = "UsuarioID";
-            this.CUsuarioID.HeaderText = "Cod.Usuario";
-            this.CUsuarioID.MinimumWidth = 6;
-            this.CUsuarioID.Name = "CUsuarioID";
-            this.CUsuarioID.ReadOnly = true;
-            this.CUsuarioID.Width = 125;
-            // 
-            // CUsuarioNombre
-            // 
-            this.CUsuarioNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CUsuarioNombre.DataPropertyName = "UsuarioNombre";
-            this.CUsuarioNombre.HeaderText = "Nombre";
-            this.CUsuarioNombre.MinimumWidth = 6;
-            this.CUsuarioNombre.Name = "CUsuarioNombre";
-            this.CUsuarioNombre.ReadOnly = true;
-            // 
-            // CUsuarioCedula
-            // 
-            this.CUsuarioCedula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CUsuarioCedula.DataPropertyName = "UsuarioCedula";
-            this.CUsuarioCedula.HeaderText = "Cedula";
-            this.CUsuarioCedula.MinimumWidth = 6;
-            this.CUsuarioCedula.Name = "CUsuarioCedula";
-            this.CUsuarioCedula.ReadOnly = true;
-            this.CUsuarioCedula.Width = 125;
-            // 
-            // CUsuarioCorreo
-            // 
-            this.CUsuarioCorreo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CUsuarioCorreo.DataPropertyName = "UsuarioCorreo";
-            this.CUsuarioCorreo.HeaderText = "Correo";
-            this.CUsuarioCorreo.MinimumWidth = 6;
-            this.CUsuarioCorreo.Name = "CUsuarioCorreo";
-            this.CUsuarioCorreo.ReadOnly = true;
-            this.CUsuarioCorreo.Width = 180;
-            // 
-            // CUsuarioTelefono
-            // 
-            this.CUsuarioTelefono.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CUsuarioTelefono.DataPropertyName = "UsuarioTelefono";
-            this.CUsuarioTelefono.HeaderText = "Telefono";
-            this.CUsuarioTelefono.MinimumWidth = 6;
-            this.CUsuarioTelefono.Name = "CUsuarioTelefono";
-            this.CUsuarioTelefono.ReadOnly = true;
-            this.CUsuarioTelefono.Width = 150;
-            // 
-            // CUsuarioRolDescripcion
-            // 
-            this.CUsuarioRolDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CUsuarioRolDescripcion.DataPropertyName = "UsuarioRolDescripcion";
-            this.CUsuarioRolDescripcion.HeaderText = "Rol";
-            this.CUsuarioRolDescripcion.MinimumWidth = 6;
-            this.CUsuarioRolDescripcion.Name = "CUsuarioRolDescripcion";
-            this.CUsuarioRolDescripcion.ReadOnly = true;
-            this.CUsuarioRolDescripcion.Width = 125;
             // 
             // FrmUsuariosGestion
             // 
