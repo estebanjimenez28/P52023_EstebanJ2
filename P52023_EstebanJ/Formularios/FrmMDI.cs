@@ -31,5 +31,46 @@ namespace P52023_EstebanJ.Formularios
             }
 
         }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmMDI_Load(object sender, EventArgs e)
+        {
+            //Mostrar el usuario logueado
+
+            string InfoUsuario = string.Format("{0}-{1}({1})",
+                Globales.MiUsuarioGlobal.UsuarioNombre,
+                Globales.MiUsuarioGlobal.UsuarioCorreo,
+                Globales.MiUsuarioGlobal.MiRolTipo.UsuarioRolDescripcion);
+        LblUsuario.Text = InfoUsuario;
+
+            switch (Globales.MiUsuarioGlobal.MiRolTipo.UsuarioRolID)
+            {
+                case 1:
+                    //seri admin, no se oculta nada
+                    break;
+                case 2:
+                    //seria usuario normal, se deben ocultar algunas opciones de menu
+                    gestionDeUsuaToolStripMenuItem.Visible= false;  
+                    rolesDeUsuarioToolStripMenuItem.Visible= false; 
+                    tiposDeProveedorToolStripMenuItem.Visible= false;   
+                    tiposDeCompraToolStripMenuItem.Visible= false;
+                    break;
+            }
+
+
+        }
+
+        private void registroDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globales.MiFormRegistroCompra.Visible)
+            {
+                Globales.MiFormRegistroCompra = new FrmRegistroCompra();
+                Globales.MiFormRegistroCompra.Show();
+            }
+        }
     }
 }
