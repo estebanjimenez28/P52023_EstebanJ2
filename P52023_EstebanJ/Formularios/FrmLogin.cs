@@ -77,7 +77,7 @@ namespace P52023_EstebanJ.Formularios
         private void FrmLogin_KeyDown(object sender, KeyEventArgs e)
         {
             //Al presionar cierta combinacion de teclas el boton de ingreso directo aparece
-            if (e.Shift & e.Alt & e.KeyCode == Keys.A)
+            if (e.Shift & e.KeyCode == Keys.A)
             {
                 //si presionamos shitf + tab + a
                 BtnIngresoDirecto.Visible = true;
