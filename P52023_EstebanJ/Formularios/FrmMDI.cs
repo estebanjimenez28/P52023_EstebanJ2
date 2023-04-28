@@ -72,5 +72,14 @@ namespace P52023_EstebanJ.Formularios
                 Globales.MiFormRegistroCompra.Show();
             }
         }
+
+        private void gestionDeProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globales.MiFormGestionProveedor.Visible)
+            {
+                Globales.MiFormGestionProveedor = new FrmProveedorGestion();
+                Globales.MiFormGestionProveedor.Show();
+            }
+        }
     }
 }

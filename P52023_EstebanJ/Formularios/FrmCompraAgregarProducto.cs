@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logica.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,14 @@ namespace P52023_EstebanJ.Formularios
 {
     public partial class FrmCompraAgregarProducto : Form
     {
+        DataTable ListaProductos { get; set; }
+
+        Producto MiProductoLocal { get; set; }
         public FrmCompraAgregarProducto()
         {
             InitializeComponent();
+            ListaProductos = new DataTable();
+            MiProductoLocal = new Producto();
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
@@ -24,7 +30,46 @@ namespace P52023_EstebanJ.Formularios
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if (DgvLista.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = DgvLista.SelectedRows[0];
+
+                //se extraen los valores del producto de la fila seleccionada
+                int IdProducto = Convert.ToInt32(row.Cells["CProductoID"].Value);
+                string NombreProducto = Convert.ToString(row.Cells["CProductoNombre"].Value);
+                string CodigoBarras = Convert.ToString(row.Cells["CProductoCodigoBarras"].Value);
+                decimal Precio = Convert.ToDecimal(row.Cells["CPrecioVentaUnitario"].Value);
+                decimal Cantidad = NumUDCantidad.Value;
+
+                //Se crea una nueva fila del datatable de detalle del formulario
+                //de registro de compra y además se asigna los valores recolectados
+                DataRow MiFila = Globales.MiFormRegistroCompra.ListaProductos.NewRow();
+                MiFila["ProductoID"] = IdProducto;
+                MiFila["Cantidad"] = Cantidad;
+                MiFila["PrecioVentaUnitario"] = Precio;
+                MiFila["ProductoNombre"] = NombreProducto;
+                MiFila["ProductoCodigoBarras"] = CodigoBarras;
+
+                Globales.MiFormRegistroCompra.ListaProductos.Rows.Add(MiFila);
+
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void FrmCompraAgregarProducto_Load(object sender, EventArgs e)
+        {
+            LlenarLista();
+        }
+        private void LlenarLista()
+        {
+            ListaProductos = new DataTable();
+
+            ListaProductos = MiProductoLocal.ListarEnBusqueda();
+
+            DgvLista.DataSource = ListaProductos;
+
+            DgvLista.ClearSelection();
+
         }
     }
 }

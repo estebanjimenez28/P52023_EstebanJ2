@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logica.Services;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -42,6 +43,18 @@ namespace Logica.Models
         public DataTable ListarInactivos()
         {
             throw new System.Exception("Not implemented");
+        }
+        //nueva función para mostrar la lista de items en la 
+        //ventana de búsqueda de productos 
+        public DataTable ListarEnBusqueda()
+        {
+            DataTable R = new DataTable();
+
+            Conexion MiCnn = new Conexion();
+
+            R = MiCnn.EjecutarSELECT("SPProductoBusquedaEsquema");
+
+            return R;
         }
 
 
